@@ -17,11 +17,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: TicketsRepository::class)]
 #[ApiResource(
     operations: [
-        new Get(uriTemplate: '/tickets/{id}', normalizationContext: ['groups' => 'tickets:item']),
+        new Get(uriTemplate: '/tickets/{guid}', normalizationContext: ['groups' => 'tickets:item']),
         new GetCollection(uriTemplate: '/tickets', normalizationContext: ['groups' => 'tickets:list']),
         new Post(uriTemplate: '/tickets', normalizationContext: ['groups' => 'tickets:item'], denormalizationContext: ['groups' => 'tickets:create']),
-        new Patch(uriTemplate: '/tickets/{id}', normalizationContext: ['groups' => 'tickets:item'], denormalizationContext: ['groups' => 'tickets:update']),
-        new Delete(uriTemplate: '/tickets/{id}', status: 200)
+        new Patch(uriTemplate: '/tickets/{guid}', normalizationContext: ['groups' => 'tickets:item'], denormalizationContext: ['groups' => 'tickets:update']),
+        new Delete(uriTemplate: '/tickets/{guid}', status: 200)
     ],
     order: ['createdAt' => 'DESC'],
     paginationEnabled: true,
@@ -86,15 +86,6 @@ class Tickets
         return $this;
     }
 
-    #[Groups(['tickets:list', 'tickets:item'])]
-    public function getLocation(): ?Locations {
-        return $this->getMovie()->getHall()->getLocation();
-    }
-
-    #[Groups(['tickets:list', 'tickets:item'])]
-    public function getHall(): ?Halls {
-        return $this->getMovie()->getHall();
-    }
 
     public function getMovie(): ?Movies
     {
@@ -179,4 +170,15 @@ class Tickets
 
         return $this;
     }
+
+    #[Groups(['tickets:list', 'tickets:item'])]
+    public function getLocation(): ?Locations {
+        return $this->getMovie()->getHall()->getLocation();
+    }
+
+    #[Groups(['tickets:list', 'tickets:item'])]
+    public function getHall(): ?Halls {
+        return $this->getMovie()->getHall();
+    }
+
 }
