@@ -26,8 +26,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
     order: ['createdAt' => 'DESC'],
     paginationEnabled: true,
 )]
-class Tickets
-{
+class Tickets {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -68,104 +68,92 @@ class Tickets
     #[Groups(['tickets:list', 'tickets:item'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    public function __construct() {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
 
-    public function getId(): ?int
-    {
+
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getGuid(): ?string
-    {
+    public function getGuid(): ?string {
         return $this->guid;
     }
 
-    public function setGuid(string $guid): static
-    {
+    public function setGuid(string $guid): static {
         $this->guid = $guid;
 
         return $this;
     }
 
 
-    public function getMovie(): ?Movies
-    {
+    public function getMovie(): ?Movies {
         return $this->movie;
     }
 
-    public function setMovie(?Movies $movie): static
-    {
+    public function setMovie(?Movies $movie): static {
         $this->movie = $movie;
 
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
+    public function getEmail(): ?string {
         return $this->email;
     }
 
-    public function setEmail(string $email): static
-    {
+    public function setEmail(string $email): static {
         $this->email = $email;
 
         return $this;
     }
 
-    public function getName(): ?string
-    {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function setName(string $name): static
-    {
+    public function setName(string $name): static {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getChairNumber(): ?int
-    {
+    public function getChairNumber(): ?int {
         return $this->chairNumber;
     }
 
-    public function setChairNumber(int $chairNumber): static
-    {
+    public function setChairNumber(int $chairNumber): static {
         $this->chairNumber = $chairNumber;
 
         return $this;
     }
 
-    public function getPrice(): ?float
-    {
+    public function getPrice(): ?float {
         return $this->price;
     }
 
-    public function setPrice(float $price): static
-    {
+    public function setPrice(float $price): static {
         $this->price = $price;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
+    public function getCreatedAt(): ?\DateTimeImmutable {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
+    public function getUpdatedAt(): ?\DateTimeImmutable {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
-    {
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static {
         $this->updatedAt = $updatedAt;
 
         return $this;
